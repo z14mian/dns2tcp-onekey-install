@@ -57,7 +57,7 @@ echo -e "${Info} 安装开发包"
 yum -y groupinstall "Development Tools"
 
 echo -e "${Info} 下载"
-if ! wget --no-check-certificate https://github.com/alex-sector/dns2tcp/archive/v0.5.2.tar.gz; then
+if ! wget --no-check-certificate  -N https://github.com/alex-sector/dns2tcp/archive/v0.5.2.tar.gz; then
 	echo -e "${Error} 服务端源码下载失败 !" && exit 1
 else
 	echo -e "${Info} 服务端源码下载完成 !"
