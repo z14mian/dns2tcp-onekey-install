@@ -38,11 +38,7 @@ do
 done
 
 
-
-
-
-
-	cat > "/etc/dns2tcpd.conf"<<-EOF
+cat > "/etc/dns2tcpd.conf"<<-EOF
 	listen = ${ip}
 	port = 53
 	user = nobody
@@ -57,7 +53,7 @@ echo -e "${Info} 安装开发包"
 yum -y groupinstall "Development Tools"
 
 echo -e "${Info} 下载"
-if ! wget --no-check-certificate  -N https://github.com/alex-sector/dns2tcp/archive/v0.5.2.tar.gz; then
+if ! wget --no-check-certificate -N https://github.com/alex-sector/dns2tcp/archive/v0.5.2.tar.gz; then
 	echo -e "${Error} 服务端源码下载失败 !" && exit 1
 else
 	echo -e "${Info} 服务端源码下载完成 !"
@@ -65,12 +61,11 @@ fi
 
 
 tar zxf v0.5.2.tar.gz
-cd v0.5.2.tar.gz
+[[ ! -e "/root/v0.5.2/" ]] && echo -e "${Error} 解压失败 !" && rm -rf v0.5.2.tar.gz && exit 1
+cd dns2tcp-0.5.2
 ./configure  
 make & make install
-#read -p "安装完成，按任意键继续"
 Write_configuration
-#echo "安装完成"
 echo -e "\033[33m 安装完成 \033[0m"
 #dns2tcpd -f /etc/dns2tcpd.conf -d 2
 #echo "运行"
